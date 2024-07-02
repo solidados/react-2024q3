@@ -1,0 +1,139 @@
+openapi: 3.0.0
+info:
+  title: GitHub REST API
+  description: An API for interacting with GitHub to retrieve a user's repository list and search for repositories.
+  version: 1.0.0
+servers:
+  - url: https://api.github.com
+    description: Main GitHub API server
+
+paths:
+  /users/{username}/repos:
+    get:
+      summary: Retrieve User Repositories
+      description: Fetches a list of repositories for the specified GitHub user with support for pagination.
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The GitHub username.
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+          description: Page number for pagination.
+        - name: per_page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+          description: Number of repositories per page.
+      responses:
+        '200':
+          description: A list of user repositories.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 123456789
+                    name:
+                      type: string
+                      example: my-repo
+                    full_name:
+                      type: string
+                      example: octocat/my-repo
+                    private:
+                      type: boolean
+                      example: false
+                    html_url:
+                      type: string
+                      example: https://github.com/octocat/my-repo
+                    description:
+                      type: string
+                      example: This is my repo.
+                    language:
+                      type: string
+                      example: JavaScript
+        '404':
+          description: User not found.
+        '401':
+          description: Authentication failed or token expired.
+
+  /search/repositories:
+    get:
+      summary: Search Repositories by Keywords
+      description: Searches for repositories based on the provided keywords with support for pagination.
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Keywords for searching repositories.
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+          description: Page number for pagination.
+        - name: per_page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 10
+            maximum: 100
+          description: Number of repositories per page.
+      responses:
+        '200':
+          description: Search results for repositories.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_count:
+                    type: integer
+                    example: 123456
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 123456789
+                        name:
+                          type: string
+                          example: my-repo
+                        full_name:
+                          type: string
+                          example: octocat/my-repo
+                        private:
+                          type: boolean
+                          example: false
+                        html_url:
+                          type: string
+                          example: https://github.com/octocat/my-repo
+                        description:
+                          type: string
+                          example: This is my repo.
+                        language:
+                          type: string
+                          example: JavaScript
+        '400':
+          description: Bad request.
+        '401':
+          description: Authentication failed or token expired.
