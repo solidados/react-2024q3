@@ -2,25 +2,27 @@
   "root": true,
   "env": {
     "browser": true,
-    "es2020": true
+    "es2020": true,
+    "jest": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
   ],
-  "ignorePatterns": [
-    "dist",
-    ".eslintrc.json"
-  ],
+  "ignorePatterns": ["dist", ".eslintrc.json", ".prettierrc.json", "vite.config.ts"],
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "@typescript-eslint",
     "react",
     "react-hooks",
     "react-refresh",
-    "react-compiler"
+    "react-compiler",
+    "prettier"
   ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "error",
@@ -29,6 +31,19 @@
     "react-refresh/only-export-components": [
       "warn",
       { "allowConstantExport": true }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "arrowParens": "always",
+        "bracketSpacing": true,
+        "endOfLine": "auto",
+        "semi": true,
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "es5",
+        "printWidth": 80
+      }
     ]
   },
   "settings": {
@@ -36,7 +51,8 @@
   },
   "parserOptions": {
     "ecmaVersion": 2020,
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
   "globals": {},
   "overrides": [],
