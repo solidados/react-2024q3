@@ -1,14 +1,13 @@
 import { Component } from 'react';
+import logo from '/logo-movie.png';
 import './style.scss';
 
 class Header extends Component {
-  state = {};
-
   render() {
     return (
       <header className="header">
         <div className="header-container">
-          <div className="header-logo">Logo</div>
+          <img src={logo} className="header-logo" alt="logo" />
           <div className="header-search-bar">
             <input
               type="text"
