@@ -42,7 +42,7 @@ class Main extends Component<NonNullable<unknown>, MainState> {
 
   render() {
     const { movies, error } = this.state;
-    const defaultPoster = '/logo-movie.png';
+    const defaultPoster = '/logo-no-image.png';
 
     return (
       <main className="main">
