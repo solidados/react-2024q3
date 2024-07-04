@@ -3,4 +3,19 @@
   padding: 20px 0;
   color: #2e2e2e;
   flex: 1 1 auto;
+
+  &-result {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .movie-card {
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+  }
 }
