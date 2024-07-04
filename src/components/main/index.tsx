@@ -42,6 +42,8 @@ class Main extends Component<NonNullable<unknown>, MainState> {
 
   render() {
     const { movies, error } = this.state;
+    const defaultPoster = '/logo-movie.png';
+
     return (
       <main className="main">
         <div className="main-container">
@@ -50,7 +52,14 @@ class Main extends Component<NonNullable<unknown>, MainState> {
             <div className="main-result">
               {movies.map((movie: Movie) => (
                 <div key={'movie.imdbID'} className="movie-card">
-                  <img src={movie.Poster} alt={movie.Title} />
+                  <img
+                    src={
+                      movie.Poster && movie.Poster !== 'N/A'
+                        ? movie.Poster
+                        : defaultPoster
+                    }
+                    alt={movie.Title}
+                  />
                   <h3>{movie.Title}</h3>
                   <p>{movie.Year}</p>
                 </div>
