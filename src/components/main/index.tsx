@@ -60,8 +60,10 @@ class Main extends Component<NonNullable<unknown>, MainState> {
                     }
                     alt={movie.Title}
                   />
-                  <h3>{movie.Title}</h3>
-                  <p>{movie.Year}</p>
+                  <div className="movie-card-descr">
+                    <h3>{movie.Title}</h3>
+                    <p>{movie.Year}</p>
+                  </div>
                 </div>
               ))}
             </div>
