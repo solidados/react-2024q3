@@ -4,6 +4,10 @@
   color: #2e2e2e;
   flex: 1 1 auto;
 
+  &-container {
+    height: calc(100vh - 160px);
+    overflow: scroll;
+  }
   &-result {
     display: flex;
     flex-wrap: wrap;

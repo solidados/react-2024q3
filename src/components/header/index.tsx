@@ -8,6 +8,7 @@ interface HeaderProps {
 
 interface HeaderState {
   searchInput: string;
+  hasError: boolean;
 }
 
 class Header extends Component<HeaderProps, HeaderState> {
@@ -15,6 +16,7 @@ class Header extends Component<HeaderProps, HeaderState> {
     super(props);
     this.state = {
       searchInput: '',
+      hasError: false,
     };
   }
 
@@ -34,12 +36,16 @@ class Header extends Component<HeaderProps, HeaderState> {
     }
   };
 
-  // TODO: remove when not needed
   throwError = (): void => {
-    throw new Error('Test error from Header');
+    this.setState({ hasError: true });
   };
 
   render() {
+    // TODO: remove when not needed
+    if (this.state.hasError) {
+      throw new Error('Test error from Header');
+    }
+
     return (
       <header className="header">
         <div className="header-container">

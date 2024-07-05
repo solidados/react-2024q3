@@ -1,6 +1,5 @@
 import { Component, createRef, RefObject } from 'react';
 import { Header, Main, Footer } from './components';
-import { ErrorBoundary } from './components';
 
 class App extends Component {
   mainRef: RefObject<Main>;
@@ -18,13 +17,11 @@ class App extends Component {
 
   render() {
     return (
-      <ErrorBoundary>
-        <div className="wrapper">
-          <Header onSearch={this.handleSearch} />
-          <Main ref={this.mainRef} />
-          <Footer />
-        </div>
-      </ErrorBoundary>
+      <div className="wrapper">
+        <Header onSearch={this.handleSearch} />
+        <Main ref={this.mainRef} />
+        <Footer />
+      </div>
     );
   }
 }
