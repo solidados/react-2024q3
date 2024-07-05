@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { ApiResponse, Movie } from '../../services/types/api.interface';
 import { api } from '../../services/apiClient';
 import { CustomError } from '../../services/errorHandler';
+import MovieCard from './ui/MovieCard';
 
 import './style.scss';
 
@@ -42,7 +43,6 @@ class Main extends Component<NonNullable<unknown>, MainState> {
 
   render() {
     const { movies, error } = this.state;
-    const defaultPoster = '/logo-no-image.png';
 
     return (
       <main className="main">
@@ -51,20 +51,7 @@ class Main extends Component<NonNullable<unknown>, MainState> {
           {movies && movies.length > 0 ? (
             <div className="main-result">
               {movies.map((movie: Movie) => (
-                <div key={movie.imdbID} className="movie-card">
-                  <img
-                    src={
-                      movie.Poster && movie.Poster !== 'N/A'
-                        ? movie.Poster
-                        : defaultPoster
-                    }
-                    alt={movie.Title}
-                  />
-                  <div className="movie-card-descr">
-                    <h3>{movie.Title}</h3>
-                    <p>{movie.Year}</p>
-                  </div>
-                </div>
+                <MovieCard key={movie.imdbID} movie={movie} />
               ))}
             </div>
           ) : (
