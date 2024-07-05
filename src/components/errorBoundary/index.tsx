@@ -22,10 +22,15 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   static getDerivedStateFromError(error: Error) {
+    if (error) {
+      console.log('ERRRRORORORORORRR!!!');
+    }
     return { hasError: true, error };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+    // TODO: remove temp console for Error test only
+    console.error('ErrorBoundary caught an error', error, errorInfo);
     this.setState({ error, errorInfo });
   }
 

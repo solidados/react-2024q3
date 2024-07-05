@@ -45,10 +45,17 @@
       border-top-right-radius: 10px;
       object-fit: cover;
       overflow: hidden;
+      filter: grayscale(95%) sepia(10%) saturate(150%) brightness(90%);
+      transition: filter 0.5s ease-in-out;
+
+      &:hover {
+        filter: none;
+      }
     }
     &:hover {
       cursor: pointer;
       transform: scale(1.02);
+      filter: none;
     }
     &:active {
       transform: scale(0.98);

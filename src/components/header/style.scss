@@ -1,6 +1,6 @@
 .header {
   width: 100%;
-  padding: 20px 0;
+  padding: 10px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &-container {
@@ -21,16 +21,16 @@
       display: flex;
     }
     &-input {
-    width: 300px;
-    height: 35px;
-    padding: 5px 10px;
-    border: 1px solid #ced4da;
-    border-radius: 5px 0 0 5px;
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.65);
-    font-size: 1em;
+      width: 300px;
+      height: 35px;
+      padding: 5px 10px;
+      border: 1px solid #ced4da;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.65);
+      font-size: 1em;
       &:focus {
-          border-color: #007bff;
+        border-color: #007bff;
       }
     }
 
@@ -42,7 +42,10 @@
       background-color: #007bff;
       font-size: 1.1em;
       color: #ffffff;
-      transition: background-color 0.3s, color 0.3s, transform 0.1s;
+      transition:
+        background-color 0.3s,
+        color 0.3s,
+        transform 0.1s;
 
       &:hover {
         background-color: #0056b3;

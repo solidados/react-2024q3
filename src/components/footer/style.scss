@@ -1,6 +1,6 @@
 .footer {
   width: 100%;
-  padding: 10px 0;
+  padding: 5px 0;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 
   &-container {
@@ -18,13 +18,13 @@
       transform: scale(1.05);
       cursor: pointer;
     }
-    &:first-of-type{
+    &:first-of-type {
       max-width: 40px;
       padding: 2px;
       border-radius: 50%;
     }
 
-    &:last-of-type{
+    &:last-of-type {
       max-width: 80px;
     }
   }

@@ -51,7 +51,7 @@ class Main extends Component<NonNullable<unknown>, MainState> {
           {movies && movies.length > 0 ? (
             <div className="main-result">
               {movies.map((movie: Movie) => (
-                <div key={'movie.imdbID'} className="movie-card">
+                <div key={movie.imdbID} className="movie-card">
                   <img
                     src={
                       movie.Poster && movie.Poster !== 'N/A'

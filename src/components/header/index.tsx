@@ -34,11 +34,19 @@ class Header extends Component<HeaderProps, HeaderState> {
     }
   };
 
+  // TODO: remove when not needed
+  throwError = (): void => {
+    throw new Error('Test error from Header');
+  };
+
   render() {
     return (
       <header className="header">
         <div className="header-container">
           <img src={logo} className="header-logo" alt="logo" />
+          <button className="error-button" onClick={this.throwError}>
+            Throw Error
+          </button>
           <div className="header-search-bar">
             <input
               type="text"
