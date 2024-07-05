@@ -1,4 +1,3 @@
-// tsconfig.json
 {
   "compilerOptions": {
     "target": "ES2020",
@@ -20,9 +19,14 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./",
+    "paths": {
+      "*": ["src/*"],
+    }
   },
-  "include": [".eslintrc.cjs", "src"],
+  "include": ["src"],
+  "exclude": ["vite.config.ts", "dist", ".eslintrc.json", ".prettierrc.json"],
   "references": [
     {
       "path": "./tsconfig.node.json"
