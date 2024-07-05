@@ -21,7 +21,7 @@ class Main extends Component<NonNullable<unknown>, MainState> {
   }
 
   componentDidMount(): void {
-    const search: string = localStorage.getItem('movie') || '';
+    const search: string = localStorage.getItem('movie') || 'Star Trek';
     this.fetchMovies(search).catch((error): Promise<void> => {
       throw new CustomError(error);
     });
