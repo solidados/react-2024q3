@@ -1,8 +1,11 @@
 .main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 auto;
   width: 100%;
   padding: 20px 0;
   color: #2e2e2e;
-  flex: 1 1 auto;
 
   &-container {
     display: flex;
