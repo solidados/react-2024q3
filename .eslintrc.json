@@ -16,6 +16,11 @@
   ],
   "ignorePatterns": ["dist", ".eslintrc.json", ".prettierrc.json", "vite.config.ts"],
   "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
   "plugins": [
     "@typescript-eslint",
     "react",
@@ -64,13 +69,11 @@
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       },
-      "typescript": { "project": "./tsconfig.json" }
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
     }
-  },
-  "parserOptions": {
-    "ecmaVersion": 2020,
-    "sourceType": "module",
-    "project": "./tsconfig.json"
   },
   "globals": {},
   "overrides": [],
