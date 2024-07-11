@@ -2,6 +2,7 @@ import React, { ChangeEvent, FC, useState } from 'react';
 
 import logo from '/logo-movie.png';
 import './style.scss';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   onSearch: (search: string) => void;
@@ -10,6 +11,7 @@ interface HeaderProps {
 const Header: FC<HeaderProps> = ({ onSearch }) => {
   const [searchInput, setSearchInput] = useState<string>('');
   // const [hasError, setHasError] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchInput(event.target.value);
@@ -19,6 +21,7 @@ const Header: FC<HeaderProps> = ({ onSearch }) => {
     const trimmedSearchValue: string = searchInput.trim();
     localStorage.setItem('movie', trimmedSearchValue);
     onSearch(trimmedSearchValue);
+    navigate(`/?search=${trimmedSearchValue}`);
   };
 
   const handleKeyDown = (
