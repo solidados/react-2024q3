@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import './style.scss';
 
 interface CustomError extends Error {
   code: number;

@@ -1,6 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
 import ErrorComponent from '../errorComponent';
-import './style.scss';
 import { CustomError } from '../../services/errorHandler';
 
 interface ErrorBoundaryProps {
