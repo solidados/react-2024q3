@@ -2,12 +2,13 @@ import { FC, useState } from 'react';
 import { Footer, Header, Main } from './components';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import ErrorComponent from './components/errorComponent';
+import { CustomError } from './services/errorHandler';
 
 const App: FC = () => {
   const [search, setSearch] = useState<string>(
     localStorage.getItem('movie') || 'Star Trek'
   );
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<CustomError | null>(null);
 
   const handleSearch = (search: string): void => {
     setSearch(search);
@@ -23,7 +24,7 @@ const App: FC = () => {
         <Header onSearch={handleSearch} />
         <main className="main">
           <Routes>
-            <Route path={'/'} element={<Main search={search} />} />
+            <Route path={'/'} element={<Main search={search} page={1} />} />
             <Route path={'*'} element={<Navigate to={'/'} replace />} />
           </Routes>
         </main>

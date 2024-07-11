@@ -4,20 +4,21 @@ import { CustomError, errorHandler } from './errorHandler';
 
 const createApiClient = (apikey: string, baseUrl: string) => {
   const getMovies = async (
-    search: string
+    search: string,
+    page: number = 1
   ): Promise<ApiResponse | undefined> => {
-    const url: string = `${baseUrl}?s=${search}&apikey=${apikey}`;
+    const url: string = `${baseUrl}?s=${search}&apikey=${apikey}&page=${page}`;
 
     try {
       const response: Response = await fetch(url);
 
       if (!response.ok) {
-        throw new CustomError('Request failed. No data found');
+        throw new CustomError('Request failed. No data found', 400);
       }
 
       return response.json();
     } catch (error: unknown) {
-      throw errorHandler(error);
+      throw errorHandler(error, (error as CustomError).code);
     }
   };
 

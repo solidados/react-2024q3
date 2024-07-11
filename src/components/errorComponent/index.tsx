@@ -4,6 +4,7 @@ import './style.scss';
 interface CustomError extends Error {
   code: number;
 }
+
 interface ErrorComponentProps {
   error: CustomError | null;
   onReload: () => void;

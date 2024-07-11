@@ -8,9 +8,10 @@ export class CustomError extends Error {
   }
 }
 
-export const errorHandler = (error: unknown, code: number): CustomError => {
+export const errorHandler = (error: unknown): CustomError => {
   if (error instanceof Error) {
-    return new CustomError(error.message, code || 500);
+    const customError = error as CustomError;
+    return new CustomError(customError.message, customError.code || 500);
   }
-  return new CustomError('An unknown error occurred', code || 500);
+  return new CustomError('An unknown error occurred', 500);
 };
