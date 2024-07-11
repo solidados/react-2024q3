@@ -29,10 +29,13 @@ const Header: FC<HeaderProps> = ({ onSearch }) => {
     }
   };
 
+  /** TODO: Code was commented to throw an Error upon request from the Task-1
+   * Delete when no use*/
+
   // const throwError = (): void => {
   //   setHasError(true);
   // };
-
+  //
   // if (hasError) {
   //   throw new Error('Test Error from Header');
   // }

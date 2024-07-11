@@ -7,8 +7,6 @@ import MovieCard from './ui/MovieCard';
 import './style.scss';
 
 interface MainProps {
-  // movies: Movie[];
-  // error: CustomError | null;
   search: string;
 }
 
@@ -33,7 +31,6 @@ const Main: FC<MainProps> = ({ search }) => {
   };
 
   useEffect((): void => {
-    // const search: string = localStorage.getItem('movie') || 'Star Trek';
     fetchMovies(search).catch((error): void => {
       setError(new CustomError(error));
     });
