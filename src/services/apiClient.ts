@@ -1,18 +1,12 @@
 import { ApiResponse } from './types/api.interface';
 import { API_KEY, BASE_URL } from './constants';
-import { errorHandler, CustomError } from './errorHandler';
+import { CustomError, errorHandler } from './errorHandler';
 
-class ApiClient {
-  private readonly apikey: string;
-  private readonly baseUrl: string;
-
-  constructor(apikey: string, baseUrl: string) {
-    this.apikey = apikey;
-    this.baseUrl = baseUrl;
-  }
-
-  async getMovies(search: string): Promise<ApiResponse | undefined> {
-    const url: string = `${this.baseUrl}?s=${search}&apikey=${this.apikey}`;
+const createApiClient = (apikey: string, baseUrl: string) => {
+  const getMovies = async (
+    search: string
+  ): Promise<ApiResponse | undefined> => {
+    const url: string = `${baseUrl}?s=${search}&apikey=${apikey}`;
 
     try {
       const response: Response = await fetch(url);
@@ -25,7 +19,11 @@ class ApiClient {
     } catch (error: unknown) {
       throw errorHandler(error);
     }
-  }
-}
+  };
 
-export const api = new ApiClient(API_KEY, BASE_URL);
+  return {
+    getMovies,
+  };
+};
+
+export const api = createApiClient(API_KEY, BASE_URL);
