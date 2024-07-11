@@ -6,12 +6,13 @@ import MovieCard from './ui/MovieCard';
 
 import './style.scss';
 
-interface MainState {
-  movies: Movie[];
-  error: CustomError | null;
+interface MainProps {
+  // movies: Movie[];
+  // error: CustomError | null;
+  search: string;
 }
 
-const Main: FC<MainState> = () => {
+const Main: FC<MainProps> = ({ search }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState<CustomError | null>(null);
 
@@ -32,11 +33,11 @@ const Main: FC<MainState> = () => {
   };
 
   useEffect((): void => {
-    const search: string = localStorage.getItem('movie') || 'Star Trek';
+    // const search: string = localStorage.getItem('movie') || 'Star Trek';
     fetchMovies(search).catch((error): void => {
       setError(new CustomError(error));
     });
-  }, []);
+  }, [search]);
 
   return (
     <main className="main">
