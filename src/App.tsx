@@ -1,29 +1,21 @@
-import { Component, createRef, RefObject } from 'react';
-import { Header, Main, Footer } from './components';
+import { FC, useState } from 'react';
+import { Footer, Header, Main } from './components';
 
-class App extends Component {
-  mainRef: RefObject<Main>;
+const App: FC = () => {
+  const [search, setSearch] = useState<string>(
+    localStorage.getItem('movie') || 'Star Trek'
+  );
 
-  constructor(props: NonNullable<unknown>) {
-    super(props);
-    this.mainRef = createRef();
-  }
-
-  handleSearch = (search: string): void => {
-    if (this.mainRef.current) {
-      this.mainRef.current.fetchMovies(search);
-    }
+  const handleSearch = (search: string): void => {
+    setSearch(search);
   };
-
-  render() {
-    return (
-      <div className="wrapper">
-        <Header onSearch={this.handleSearch} />
-        <Main ref={this.mainRef} />
-        <Footer />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="wrapper">
+      <Header onSearch={handleSearch} />
+      <Main search={search} />
+      <Footer />
+    </div>
+  );
+};
 
 export default App;
