@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC, useState } from 'react';
+
 import logo from '/logo-movie.png';
 import './style.scss';
 
@@ -8,7 +9,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ onSearch }) => {
   const [searchInput, setSearchInput] = useState<string>('');
-  const [hasError, setHasError] = useState<boolean>(false);
+  // const [hasError, setHasError] = useState<boolean>(false);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchInput(event.target.value);
@@ -19,6 +20,7 @@ const Header: FC<HeaderProps> = ({ onSearch }) => {
     localStorage.setItem('movie', trimmedSearchValue);
     onSearch(trimmedSearchValue);
   };
+
   const handleKeyDown = (
     event: React.KeyboardEvent<HTMLInputElement>
   ): void => {
@@ -27,21 +29,21 @@ const Header: FC<HeaderProps> = ({ onSearch }) => {
     }
   };
 
-  const throwError = (): void => {
-    setHasError(true);
-  };
+  // const throwError = (): void => {
+  //   setHasError(true);
+  // };
 
-  if (hasError) {
-    throw new Error('Test Error from Header');
-  }
+  // if (hasError) {
+  //   throw new Error('Test Error from Header');
+  // }
 
   return (
     <header className="header">
       <div className="header-container">
         <img src={logo} className="header-logo" alt="logo" />
-        <button className="error-button" onClick={throwError}>
-          Throw Error
-        </button>
+        {/*<button className="error-button" onClick={throwError}>*/}
+        {/*  Throw Error*/}
+        {/*</button>*/}
         <div className="header-search-bar">
           <input
             type="text"
