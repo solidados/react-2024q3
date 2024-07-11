@@ -28,14 +28,14 @@ const Main: FC<MainProps> = ({ search }) => {
         setError(null);
       }
     } catch (error: unknown) {
-      setError(error as CustomError);
+      setError(new CustomError((error as Error).message, 404));
     }
   };
 
   useEffect((): void => {
     const query = new URLSearchParams(location.search).get('search') || search;
     fetchMovies(query).catch((error): void => {
-      setError(error as CustomError);
+      setError(new CustomError(error.message, 500));
     });
   }, [search, location.search]);
 

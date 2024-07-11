@@ -1,13 +1,16 @@
 export class CustomError extends Error {
-  constructor(message: string) {
+  code: number;
+
+  constructor(message: string, code: number) {
     super(message);
     this.name = 'CustomError';
+    this.code = code;
   }
 }
 
-export const errorHandler = (error: unknown): CustomError => {
+export const errorHandler = (error: unknown, code: number): CustomError => {
   if (error instanceof Error) {
-    return new CustomError(error.message);
+    return new CustomError(error.message, code || 500);
   }
-  return new CustomError('An unknown error occurred');
+  return new CustomError('An unknown error occurred', code || 500);
 };

@@ -1,6 +1,7 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
 import ErrorComponent from '../errorComponent';
 import './style.scss';
+import { CustomError } from '../../services/errorHandler';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -8,7 +9,7 @@ interface ErrorBoundaryProps {
 
 interface ErrorBoundaryState {
   hasError: boolean;
-  error: Error | null;
+  error: CustomError | null;
   errorInfo: ErrorInfo | null;
 }
 
@@ -23,11 +24,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   static getDerivedStateFromError(error: Error) {
-    return { hasError: true, error };
+    return { hasError: true, error: new CustomError(error.message, 500) };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    this.setState({ error, errorInfo });
+    this.setState({ error: new CustomError(error.message, 500), errorInfo });
   }
 
   handleReload = (): void => {
