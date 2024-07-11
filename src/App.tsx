@@ -21,7 +21,7 @@ const App: FC = () => {
     <BrowserRouter>
       <div className="wrapper">
         <Header onSearch={handleSearch} />
-        <main>
+        <main className="main">
           <Routes>
             <Route path={'/'} element={<Main search={search} />} />
             <Route path={'*'} element={<Navigate to={'/'} replace />} />

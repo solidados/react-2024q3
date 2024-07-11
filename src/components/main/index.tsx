@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ApiResponse, Movie } from '../../services/types/api.interface';
 import { api } from '../../services/apiClient';
 import { CustomError } from '../../services/errorHandler';
@@ -13,6 +14,7 @@ interface MainProps {
 const Main: FC<MainProps> = ({ search }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState<CustomError | null>(null);
+  const location = useLocation();
 
   const fetchMovies = async (search: string): Promise<void> => {
     try {
@@ -31,26 +33,25 @@ const Main: FC<MainProps> = ({ search }) => {
   };
 
   useEffect((): void => {
-    fetchMovies(search).catch((error): void => {
-      setError(new CustomError(error));
+    const query = new URLSearchParams(location.search).get('search') || search;
+    fetchMovies(query).catch((error): void => {
+      setError(error as CustomError);
     });
-  }, [search]);
+  }, [search, location.search]);
 
   return (
-    <main className="main">
-      <div className="main-container">
-        {error && <p>{error.message}</p>}
-        {movies && movies.length > 0 ? (
-          <div className="main-result">
-            {movies.map((movie: Movie) => (
-              <MovieCard key={movie.imdbID} movie={movie} />
-            ))}
-          </div>
-        ) : (
-          <p>No movies found</p>
-        )}
-      </div>
-    </main>
+    <div className="main-container">
+      {error && <p>{error.message}</p>}
+      {movies && movies.length > 0 ? (
+        <div className="main-result">
+          {movies.map((movie: Movie) => (
+            <MovieCard key={movie.imdbID} movie={movie} />
+          ))}
+        </div>
+      ) : (
+        <p>No movies found</p>
+      )}
+    </div>
   );
 };
 
