@@ -66,7 +66,7 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
   }, [search, location.search, initialPage]);
 
   return (
-    <div className="main-container">
+    <>
       {error && <p>{error.message}</p>}
       {movies && movies.length > 0 ? (
         <div className="main-wrapper">
@@ -90,7 +90,7 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
       ) : (
         <p>No movies found</p>
       )}
-    </div>
+    </>
   );
 };
 

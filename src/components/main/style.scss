@@ -36,7 +36,11 @@
     padding: 0 0 20px;
 
     & button {
-      @include mainButton($border-radius: 50%, $padding: 5px 12px);
+      @include buttonActive($border-radius: 50%, $padding: 5px 12px);
+
+      &[disabled] {
+        @include buttonInactive($border-radius: 50%, $padding: 5px 12px);
+      }
     }
   }
 
