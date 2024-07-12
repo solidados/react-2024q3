@@ -72,13 +72,13 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
         <div className="main-wrapper">
           <div className="main-pagination">
             <button onClick={handlePreviousPage} disabled={page === 1}>
-              &lt;
+              &#8701;
             </button>
             <span>
               Page {page} of {totalPages}
             </span>
             <button onClick={handleNextPage} disabled={page === totalPages}>
-              &gt;
+              &#8702;
             </button>
           </div>
           <div className="main-result">

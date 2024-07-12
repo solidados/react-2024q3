@@ -1,5 +1,6 @@
 // --- main button ---
 @mixin buttonActive(
+  $display: flex,
   $height: 35px,
   $padding: 5px 15px,
   $border-radius: 5px,
@@ -12,16 +13,16 @@
   $transition-time: 0.3s,
   $transform-time: 0.1s
 ) {
+  display: $display;
   height: $height;
   padding: $padding;
   border-radius: $border-radius;
   background-color: $background-color;
   font-size: $font-size;
   color: $color;
-  transition:
-    background-color $transition-time,
-    color $transition-time,
-    transform $transform-time;
+  transition: background-color $transition-time,
+  color $transition-time,
+  transform $transform-time;
   cursor: pointer;
 
   &:hover {
