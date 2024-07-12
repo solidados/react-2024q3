@@ -1,0 +1,34 @@
+// main button
+@mixin mainButton(
+  $height: 35px,
+  $padding: 5px 15px,
+  $border-radius: 5px,
+  $background-color: #007bff,
+  $font-size: 1.1em,
+  $color: #ffffff,
+  $hover-bg-color: #0056b3,
+  $hover-color: #e2e6ea,
+  $scale: 0.98,
+  $transition-time: 0.3s,
+  $transform-time: 0.1s
+) {
+  height: $height;
+  padding: $padding;
+  border-radius: $border-radius;
+  background-color: $background-color;
+  font-size: $font-size;
+  color: $color;
+  transition:
+    background-color $transition-time,
+    color $transition-time,
+    transform $transform-time;
+
+  &:hover {
+    background-color: $hover-bg-color;
+    color: $hover-color;
+  }
+
+  &:active {
+    transform: scale($scale);
+  }
+}

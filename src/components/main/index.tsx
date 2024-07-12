@@ -69,24 +69,24 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
     <div className="main-container">
       {error && <p>{error.message}</p>}
       {movies && movies.length > 0 ? (
-        <>
-          <div className="main-result">
-            {movies.map((movie: Movie) => (
-              <MovieCard key={movie.imdbID} movie={movie} />
-            ))}
-          </div>
-          <div className="pagination">
+        <div className="main-wrapper">
+          <div className="main-pagination">
             <button onClick={handlePreviousPage} disabled={page === 1}>
-              Previous
+              &lt;
             </button>
             <span>
               Page {page} of {totalPages}
             </span>
             <button onClick={handleNextPage} disabled={page === totalPages}>
-              Next
+              &gt;
             </button>
           </div>
-        </>
+          <div className="main-result">
+            {movies.map((movie: Movie) => (
+              <MovieCard key={movie.imdbID} movie={movie} />
+            ))}
+          </div>
+        </div>
       ) : (
         <p>No movies found</p>
       )}
