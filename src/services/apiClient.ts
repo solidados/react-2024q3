@@ -18,7 +18,7 @@ const createApiClient = (apikey: string, baseUrl: string) => {
 
       return response.json();
     } catch (error: unknown) {
-      throw errorHandler(error, (error as CustomError).code);
+      throw errorHandler(error);
     }
   };
 
