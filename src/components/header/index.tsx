@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import logo from '/logo-movie.png';
 import './style.scss';
-import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   onSearch: (search: string) => void;
@@ -10,7 +10,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ onSearch }) => {
   const [searchInput, setSearchInput] = useState<string>('');
-  const [hasError, setHasError] = useState<boolean>(false);
+  // const [hasError, setHasError] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -35,21 +35,21 @@ const Header: FC<HeaderProps> = ({ onSearch }) => {
   /** TODO: Code was commented to throw an Error upon request from the Task-1
    * Delete when no use*/
 
-  const throwError = (): void => {
-    setHasError(true);
-  };
-
-  if (hasError) {
-    throw new Error('Test Error from Header');
-  }
+  // const throwError = (): void => {
+  //   setHasError(true);
+  // };
+  //
+  // if (hasError) {
+  //   throw new Error('Test Error from Header');
+  // }
 
   return (
     <header className="header">
       <div className="header-container">
         <img src={logo} className="header-logo" alt="logo" />
-        <button className="error-button" onClick={throwError}>
-          Throw Error
-        </button>
+        {/*<button className="error-button" onClick={throwError}>*/}
+        {/*  Throw Error*/}
+        {/*</button>*/}
         <div className="header-search-bar">
           <input
             type="text"
