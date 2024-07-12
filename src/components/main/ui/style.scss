@@ -1,3 +1,5 @@
+@import "../../../styles/mixins";
+
 .movie-card {
   width: 13.75rem;
   border-top-right-radius: 8px;
@@ -7,17 +9,18 @@
   text-align: center;
 
   &-descr {
-    display: flex;
+    @include flexParams($justify-content: space-between);
     flex-direction: column;
-    justify-content: space-between;
     height: 60px;
     padding: 8px 0;
     line-height: 1.2;
     overflow: hidden;
+
     & h3 {
       font-size: 0.8rem;
       font-weight: 600;
     }
+
     & p {
       font-size: 0.8em;
       font-weight: 100;
@@ -39,11 +42,13 @@
       filter: none;
     }
   }
+
   &:hover {
     cursor: pointer;
     transform: scale(1.02);
     filter: none;
   }
+
   &:active {
     transform: scale(0.98);
   }

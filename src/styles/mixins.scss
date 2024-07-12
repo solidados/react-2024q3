@@ -1,6 +1,18 @@
+// --- display ---
+@mixin flexParams(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
 // --- main button ---
 @mixin buttonActive(
   $display: flex,
+  $align-items: center,
   $height: 35px,
   $padding: 5px 15px,
   $border-radius: 5px,
@@ -20,9 +32,10 @@
   background-color: $background-color;
   font-size: $font-size;
   color: $color;
-  transition: background-color $transition-time,
-  color $transition-time,
-  transform $transform-time;
+  transition:
+    background-color $transition-time,
+    color $transition-time,
+    transform $transform-time;
   cursor: pointer;
 
   &:hover {
@@ -36,6 +49,8 @@
 }
 
 @mixin buttonInactive(
+  $display: flex,
+  $align-items: center,
   $height: 35px,
   $padding: 5px 15px,
   $border-radius: 5px,

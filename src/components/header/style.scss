@@ -1,11 +1,12 @@
+@import "../../styles/mixins";
+
 .header {
   width: 100%;
   padding: 10px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &-container {
-    display: flex;
-    align-items: center;
+    @include flexParams($justify-content: flex-start);
     gap: 5em;
   }
 
@@ -15,32 +16,18 @@
     border: 1px solid rgb(138, 138, 138);
     border-radius: 50%;
   }
+
   // TODO: remove this button after cross-check
   .error-button {
-    height: 35px;
-    padding: 5px 15px;
-    border-radius: 5px;
-    background-color: #007bff;
-    font-size: 1.1em;
-    color: #ffffff;
-    transition:
-      background-color 0.3s,
-      color 0.3s,
-      transform 0.1s;
-
-    &:hover {
-      background-color: #0056b3;
-      color: #e2e6ea;
-    }
-    &:active {
-      transform: scale(0.98);
-    }
+    @include buttonActive();
   }
+
   // --- eol ---
   &-search {
     &-bar {
       display: flex;
     }
+
     &-input {
       width: 300px;
       height: 35px;
@@ -50,32 +37,14 @@
       outline: none;
       background-color: rgba(255, 255, 255, 0.65);
       font-size: 1em;
+
       &:focus {
         border-color: #007bff;
       }
     }
 
     &-button {
-      height: 35px;
-      padding: 5px 15px;
-      border-left: none;
-      border-radius: 0 5px 5px 0;
-      background-color: #007bff;
-      font-size: 1.1em;
-      color: #ffffff;
-      transition:
-        background-color 0.3s,
-        color 0.3s,
-        transform 0.1s;
-
-      &:hover {
-        background-color: #0056b3;
-        color: #e2e6ea;
-      }
-
-      &:active {
-        transform: scale(0.98);
-      }
+      @include buttonActive($border-radius: 0 5px 5px 0);
     }
   }
 }
