@@ -1,10 +1,11 @@
 import { FC, useEffect, useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ApiResponse, Movie } from '../../services/types/api.interface';
 import { api } from '../../services/apiClient';
 import { CustomError } from '../../services/errorHandler';
 import MovieCard from './ui/MovieCard';
 import Loader from './ui/Loader';
+import { DetailedMovie } from '../index';
 
 import './style.scss';
 
@@ -115,10 +116,10 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
         </div>
         {location.search.includes('details=') && (
           <div className="details-section">
-            <button className="close-details" onClick={handleCloseDetails}>
+            <button className="details-close" onClick={handleCloseDetails}>
               &times;
             </button>
-            <Outlet />
+            <DetailedMovie />
           </div>
         )}
       </div>

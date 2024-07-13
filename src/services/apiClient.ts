@@ -1,4 +1,4 @@
-import { ApiResponse, DetailedMovie } from './types/api.interface';
+import { ApiResponse, MovieDetails } from './types/api.interface';
 import { API_KEY, BASE_URL } from './constants';
 import { CustomError, errorHandler } from './errorHandler';
 
@@ -24,7 +24,7 @@ const createApiClient = (apikey: string, baseUrl: string) => {
 
   const getMovieDetails = async (
     imdbID: string
-  ): Promise<DetailedMovie | undefined> => {
+  ): Promise<MovieDetails | undefined> => {
     const url: string = `${baseUrl}?i=${imdbID}&apikey=${apikey}`;
 
     try {
