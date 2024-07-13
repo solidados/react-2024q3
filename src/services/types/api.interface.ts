@@ -12,7 +12,7 @@ export interface ApiResponse {
   Response: string;
 }
 
-export interface DetailedMovie {
+export interface MovieDetails {
   Title: string;
   Year: string;
   Rated: string;

@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ApiResponse, Movie } from '../../services/types/api.interface';
 import { api } from '../../services/apiClient';
 import { CustomError } from '../../services/errorHandler';
@@ -70,35 +70,59 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
     });
   }, [search, location.search, initialPage]);
 
+  const handleCardClick = (imdbID: string): void => {
+    navigate(`/?search=${search}&page=${page}&details=${imdbID}`);
+  };
+
+  const handleCloseDetails = (): void => {
+    navigate(`/?search=${search}&page=${page}`);
+  };
+
   return (
-    <>
-      {error && <p>{error.message}</p>}
-      {isLoading && <Loader />}
-      {movies && movies.length > 0 ? (
-        <>
-          <div className="main-pagination">
-            <button onClick={handlePreviousPage} disabled={page === 1}>
-              &#8701;
+    <main className="main">
+      <div className="main-container">
+        <div className="main-content">
+          {error && <p>{error.message}</p>}
+          {isLoading && <Loader />}
+          {movies && movies.length > 0 ? (
+            <>
+              <div className="main-pagination">
+                <button onClick={handlePreviousPage} disabled={page === 1}>
+                  &#8701;
+                </button>
+                <span>
+                  Page {page} of {totalPages}
+                </span>
+                <button onClick={handleNextPage} disabled={page === totalPages}>
+                  &#8702;
+                </button>
+              </div>
+              <div className="main-wrapper">
+                <div className="main-result">
+                  {movies.map((movie: Movie) => (
+                    <MovieCard
+                      key={movie.imdbID}
+                      movie={movie}
+                      onClick={() => handleCardClick(movie.imdbID)}
+                    />
+                  ))}
+                </div>
+              </div>
+            </>
+          ) : (
+            <p>No movies found</p>
+          )}
+        </div>
+        {location.search.includes('details=') && (
+          <div className="details-section">
+            <button className="close-details" onClick={handleCloseDetails}>
+              &times;
             </button>
-            <span>
-              Page {page} of {totalPages}
-            </span>
-            <button onClick={handleNextPage} disabled={page === totalPages}>
-              &#8702;
-            </button>
+            <Outlet />
           </div>
-          <div className="main-wrapper">
-            <div className="main-result">
-              {movies.map((movie: Movie) => (
-                <MovieCard key={movie.imdbID} movie={movie} />
-              ))}
-            </div>
-          </div>
-        </>
-      ) : (
-        <p>No movies found</p>
-      )}
-    </>
+        )}
+      </div>
+    </main>
   );
 };
 

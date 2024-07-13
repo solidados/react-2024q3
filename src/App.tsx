@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Footer, Header, Main } from './components';
+import { DetailedMovie, Footer, Header, Main } from './components';
 import ErrorComponent from './components/errorComponent';
 import { CustomError } from './services/errorHandler';
 
@@ -19,22 +19,20 @@ const App: FC = () => {
   return (
     <div className="wrapper">
       <Header onSearch={handleSearch} />
-      <main className="main">
-        <div className="main-container">
-          <Routes>
-            <Route path={'/'} element={<Main search={search} page={1} />} />
-            <Route
-              path={'*'}
-              element={
-                <ErrorComponent
-                  error={new CustomError('Page not found', 404)}
-                  onReload={handleReload}
-                />
-              }
+      <Routes>
+        <Route path="/" element={<Main search={search} page={1} />}>
+          <Route path="movie/:imdbID" element={<DetailedMovie />} />
+        </Route>
+        <Route
+          path="*"
+          element={
+            <ErrorComponent
+              error={new CustomError('Page not found', 404)}
+              onReload={handleReload}
             />
-          </Routes>
-        </div>
-      </main>
+          }
+        />
+      </Routes>
       {error && <ErrorComponent error={error} onReload={handleReload} />}
       <Footer />
     </div>
