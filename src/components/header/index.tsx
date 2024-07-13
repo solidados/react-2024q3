@@ -1,5 +1,6 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSearchQuery } from '../../hooks/useSearchQuery.hook';
 
 import logo from '/logo-movie.png';
 import './style.scss';
@@ -9,9 +10,9 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ onSearch }) => {
-  const [searchInput, setSearchInput] = useState<string>('');
-  // const [hasError, setHasError] = useState<boolean>(false);
+  const [searchInput, setSearchInput] = useSearchQuery('');
   const navigate = useNavigate();
+  // const [hasError, setHasError] = useState<boolean>(false);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchInput(event.target.value);
@@ -19,7 +20,6 @@ const Header: FC<HeaderProps> = ({ onSearch }) => {
 
   const handleSearch = (): void => {
     const trimmedSearchValue: string = searchInput.trim();
-    localStorage.setItem('movie', trimmedSearchValue);
     onSearch(trimmedSearchValue);
     navigate(`/?search=${trimmedSearchValue}`);
   };

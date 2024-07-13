@@ -8,7 +8,7 @@
   color: #2e2e2e;
 
   &-container {
-    @include flexParams();
+    @include flexParams($justify-content: flex-start);
     flex-direction: column;
   }
 
@@ -27,7 +27,11 @@
     padding: 0 0 20px;
 
     & button {
-      @include buttonActive($border-radius: 50%, $padding: 5px 12px);
+      @include buttonActive(
+        $border-radius: 50%,
+        $align-items: stretch,
+        $padding: 5px 12px
+      );
 
       &[disabled] {
         @include buttonInactive($border-radius: 50%, $padding: 5px 12px);

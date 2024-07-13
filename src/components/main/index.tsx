@@ -4,6 +4,7 @@ import { ApiResponse, Movie } from '../../services/types/api.interface';
 import { api } from '../../services/apiClient';
 import { CustomError } from '../../services/errorHandler';
 import MovieCard from './ui/MovieCard';
+import Loader from './ui/Loader';
 
 import './style.scss';
 
@@ -16,11 +17,13 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [page, setPage] = useState<number>(initialPage);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<CustomError | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
 
   const fetchMovies = async (search: string, page: number): Promise<void> => {
+    setIsLoading(true);
     try {
       const data: ApiResponse | undefined = await api.getMovies(search, page);
 
@@ -35,6 +38,8 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
       }
     } catch (error: unknown) {
       setError(new CustomError((error as Error).message, 404));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -68,8 +73,9 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
   return (
     <>
       {error && <p>{error.message}</p>}
+      {isLoading && <Loader />}
       {movies && movies.length > 0 ? (
-        <div className="main-wrapper">
+        <>
           <div className="main-pagination">
             <button onClick={handlePreviousPage} disabled={page === 1}>
               &#8701;
@@ -81,12 +87,14 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
               &#8702;
             </button>
           </div>
-          <div className="main-result">
-            {movies.map((movie: Movie) => (
-              <MovieCard key={movie.imdbID} movie={movie} />
-            ))}
+          <div className="main-wrapper">
+            <div className="main-result">
+              {movies.map((movie: Movie) => (
+                <MovieCard key={movie.imdbID} movie={movie} />
+              ))}
+            </div>
           </div>
-        </div>
+        </>
       ) : (
         <p>No movies found</p>
       )}
