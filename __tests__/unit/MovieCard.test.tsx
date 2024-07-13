@@ -40,7 +40,7 @@ describe('Movie Card Component', (): void => {
       expect(
         screen.getByText(detailedMovie.Title && detailedMovie.Plot)
       ).toBeInTheDocument();
-      // expect(screen.getByText(detailedMovie.Plot)).toBeInTheDocument();
+      // expect(screen.getByText(movieDetails.Plot)).toBeInTheDocument();
     });
   });
 

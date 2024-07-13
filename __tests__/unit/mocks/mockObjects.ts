@@ -1,7 +1,4 @@
-import {
-  DetailedMovie,
-  Movie,
-} from '../../../src/services/types/api.interface';
+import { Movie, MovieDetails } from '../../../src/services/types/api.interface';
 
 export const mockMovies: Movie[] = [
   { imdbID: '1', Title: 'Movie 1', Year: '2021', Poster: 'N/A', Type: '' },
@@ -18,7 +15,7 @@ export const mockMovie: Movie = {
   Type: 'movie',
 };
 
-export const detailedMovie: DetailedMovie = {
+export const detailedMovie: MovieDetails = {
   Title: 'Movie 1',
   Year: '2021',
   Rated: 'PG',
