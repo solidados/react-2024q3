@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Movie } from '../../../services/types/api.interface';
 import { Link } from 'react-router-dom';
 

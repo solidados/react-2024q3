@@ -1,4 +1,3 @@
-import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, expect } from 'vitest';
 import { BrowserRouter as Router } from 'react-router-dom';

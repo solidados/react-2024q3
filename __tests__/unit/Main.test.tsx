@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, expect } from 'vitest';
 import * as apiClient from '../../src/services/apiClient';
@@ -43,6 +42,8 @@ describe('Main Component', (): void => {
         <Main search="test" page={1} />
       </Router>
     );
-    await screen.findByText('No movies found');
+    await waitFor((): void => {
+      expect(screen.getByText('No movies found')).toBeInTheDocument();
+    });
   });
 });
