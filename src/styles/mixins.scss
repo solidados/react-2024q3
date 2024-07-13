@@ -26,6 +26,7 @@
   $transform-time: 0.1s
 ) {
   display: $display;
+  align-items: $align-items;
   height: $height;
   padding: $padding;
   border-radius: $border-radius;
