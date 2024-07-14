@@ -12,7 +12,6 @@ interface HeaderProps {
 const Header: FC<HeaderProps> = ({ onSearch }) => {
   const [searchInput, setSearchInput] = useSearchQuery('');
   const navigate = useNavigate();
-  // const [hasError, setHasError] = useState<boolean>(false);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchInput(event.target.value);
@@ -21,7 +20,7 @@ const Header: FC<HeaderProps> = ({ onSearch }) => {
   const handleSearch = (): void => {
     const trimmedSearchValue: string = searchInput.trim();
     onSearch(trimmedSearchValue);
-    navigate(`/?search=${trimmedSearchValue}`);
+    navigate(`/?s=${trimmedSearchValue}`);
   };
 
   const handleKeyDown = (

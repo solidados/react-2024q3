@@ -1,11 +1,10 @@
-import { FC, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { FC, useEffect, useState } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ApiResponse, Movie } from '../../services/types/api.interface';
 import { api } from '../../services/apiClient';
 import { CustomError } from '../../services/errorHandler';
 import MovieCard from './ui/MovieCard';
 import Loader from './ui/Loader';
-import { DetailedMovie } from '../index';
 
 import './style.scss';
 
@@ -21,7 +20,9 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<CustomError | null>(null);
   const location = useLocation();
+  console.log('Location: ', location);
   const navigate = useNavigate();
+  // console.log(navigate);
 
   const fetchMovies = async (search: string, page: number): Promise<void> => {
     setIsLoading(true);
@@ -48,7 +49,7 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
     if (page < totalPages) {
       const nextPage: number = page + 1;
       setPage(nextPage);
-      navigate(`/?search=${search}&page=${nextPage}`);
+      navigate(`/?s=${search}&page=${nextPage}`);
     }
   };
 
@@ -56,12 +57,12 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
     if (page > 1) {
       const previousPage: number = page - 1;
       setPage(previousPage);
-      navigate(`/?search=${search}&page=${previousPage}`);
+      navigate(`/?s=${search}&page=${previousPage}`);
     }
   };
 
   useEffect((): void => {
-    const query = new URLSearchParams(location.search).get('search') || search;
+    const query = new URLSearchParams(location.search).get('s') || search;
     const pageParam = new URLSearchParams(location.search).get('page');
     const pageNumber = pageParam ? parseInt(pageParam, 10) : initialPage;
     setPage(pageNumber);
@@ -72,11 +73,12 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
   }, [search, location.search, initialPage]);
 
   const handleCardClick = (imdbID: string): void => {
-    navigate(`/?search=${search}&page=${page}&details=${imdbID}`);
+    navigate(`/${imdbID}`);
+    // navigate(`/?search=${search}&page=${page}&details=${imdbID}`);
   };
 
   const handleCloseDetails = (): void => {
-    navigate(`/?search=${search}&page=${page}`);
+    navigate(`/?s=${search}&page=${page}`);
   };
 
   return (
@@ -114,12 +116,13 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
             <p>No movies found</p>
           )}
         </div>
-        {location.search.includes('details=') && (
+        {location.search.includes('i') && (
           <div className="details-section">
             <button className="details-close" onClick={handleCloseDetails}>
               &times;
             </button>
-            <DetailedMovie />
+            <Outlet />
+            {/*<DetailedMovie />*/}
           </div>
         )}
       </div>
