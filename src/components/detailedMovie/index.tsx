@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { MovieDetails } from '../../services/types/api.interface';
-import { CustomError } from '../../services/errorHandler';
-
-import './style.scss';
-import Loader from '../main/ui/Loader';
 import { useParams } from 'react-router-dom';
 import { api } from '../../services/apiClient';
+import { MovieDetails } from '../../services/types/api.interface';
+import { CustomError } from '../../services/errorHandler';
+import Loader from '../main/ui/Loader';
+
+import './style.scss';
 
 const DetailedMovie = () => {
   const { imdbID } = useParams<{ imdbID: string }>();
@@ -41,29 +41,39 @@ const DetailedMovie = () => {
 
   return (
     <div className="movie-details">
-      <h2>{movie.Title}</h2>
-      <img
-        src={movie.Poster ? movie.Poster : defaultPoster}
-        alt={movie.Title}
-      />
-      <p>
-        <strong>Year:</strong> {movie.Year}
-      </p>
-      <p>
-        <strong>Genre:</strong> {movie.Genre}
-      </p>
-      <p>
-        <strong>Rated:</strong> {movie.Rated}
-      </p>
-      <p>
-        <strong>Plot:</strong> {movie.Plot}
-      </p>
-      <p>
-        <strong>Country:</strong> {movie.Country}
-      </p>
-      <a href={movie.Website} target="_blank" rel="noopener noreferrer">
-        Review
-      </a>
+      <div className="movie-details-poster">
+        <img
+          src={movie.Poster ? movie.Poster : defaultPoster}
+          alt={movie.Title}
+        />
+      </div>
+      <div className="movie-details-info">
+        <h2>
+          <strong>Year: </strong>
+          {movie.Title}
+        </h2>
+        <p>
+          <strong>Year:</strong> {movie.Year}
+        </p>
+        <p>
+          <strong>Genre:</strong> {movie.Genre}
+        </p>
+        <p>
+          <strong>Rated:</strong> {movie.Rated}
+        </p>
+        <p className="movie-details-plot">
+          <strong>Plot:</strong> {movie.Plot}
+        </p>
+        <p>
+          <strong>Country:</strong> {movie.Country}
+        </p>
+        <p>
+          <strong>Website:</strong>{' '}
+          <a href={movie.Website} rel="noopener noreferrer">
+            Review
+          </a>
+        </p>
+      </div>
     </div>
   );
 };

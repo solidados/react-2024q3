@@ -3,6 +3,7 @@
 .error-page {
   @include flexParams();
   flex-direction: column;
+  flex: 1 1 auto;
   padding: 20px;
   text-align: center;
   color: #2e2e2e;

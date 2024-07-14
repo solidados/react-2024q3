@@ -21,7 +21,7 @@ const App: FC = () => {
       <Header onSearch={handleSearch} />
       <Routes>
         <Route path="/" element={<Main search={search} page={1} />}>
-          <Route path="/:imdbID" element={<DetailedMovie />} />
+          <Route path="/details/:imdbID" element={<DetailedMovie />} />
         </Route>
         <Route
           path="*"

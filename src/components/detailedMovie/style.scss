@@ -1,32 +1,30 @@
 @import "../../styles/mixins.scss";
 
-.detailed-movie {
-  @include flexParams();
+.movie-details {
+  @include flexParams($justify-content: space-evenly);
   flex-direction: column;
-  align-items: center;
   height: 100%;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-  &-info {
-    max-width: 40rem;
-  }
+  //box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   &-poster {
     margin-bottom: 30px;
 
     & img {
-      height: 500px;
       border-radius: 10px;
     }
   }
 
+  &-info {
+    max-width: 40rem;
+  }
+
   & h2 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   & p {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   &-plot {
@@ -48,7 +46,7 @@
     width: 50vw;
     height: 100vh;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.97);
+    background: rgba(250, 250, 250, 0.97);
     box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out;
     transform: translateX(100%);

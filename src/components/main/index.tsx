@@ -20,9 +20,7 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<CustomError | null>(null);
   const location = useLocation();
-  console.log('Location: ', location);
   const navigate = useNavigate();
-  // console.log(navigate);
 
   const fetchMovies = async (search: string, page: number): Promise<void> => {
     setIsLoading(true);
@@ -72,11 +70,6 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
     });
   }, [search, location.search, initialPage]);
 
-  const handleCardClick = (imdbID: string): void => {
-    navigate(`/${imdbID}`);
-    // navigate(`/?search=${search}&page=${page}&details=${imdbID}`);
-  };
-
   const handleCloseDetails = (): void => {
     navigate(`/?s=${search}&page=${page}`);
   };
@@ -103,11 +96,7 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
               <div className="main-wrapper">
                 <div className="main-result">
                   {movies.map((movie: Movie) => (
-                    <MovieCard
-                      key={movie.imdbID}
-                      movie={movie}
-                      onClick={() => handleCardClick(movie.imdbID)}
-                    />
+                    <MovieCard key={movie.imdbID} movie={movie} />
                   ))}
                 </div>
               </div>
@@ -116,13 +105,12 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
             <p>No movies found</p>
           )}
         </div>
-        {location.search.includes('i') && (
+        {location.pathname.includes('details') && (
           <div className="details-section">
             <button className="details-close" onClick={handleCloseDetails}>
               &times;
             </button>
             <Outlet />
-            {/*<DetailedMovie />*/}
           </div>
         )}
       </div>

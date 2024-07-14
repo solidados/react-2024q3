@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSearchQuery } from '../../hooks/useSearchQuery.hook';
 
 import logo from '/logo-movie.png';
@@ -45,7 +45,9 @@ const Header: FC<HeaderProps> = ({ onSearch }) => {
   return (
     <header className="header">
       <div className="header-container">
-        <img src={logo} className="header-logo" alt="logo" />
+        <Link to={'/'}>
+          <img src={logo} className="header-logo" alt="logo" />
+        </Link>
         {/*<button className="error-button" onClick={throwError}>*/}
         {/*  Throw Error*/}
         {/*</button>*/}
