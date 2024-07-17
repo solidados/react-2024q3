@@ -1,0 +1,23 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 auto;
+  width: 100%;
+  padding: 20px 0;
+  color: #2e2e2e;
+
+  &-container {
+    display: flex;
+    align-items: center;
+    //height: calc(100vh - 160px);
+    //overflow: scroll;
+  }
+
+  &-result {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 20px;
+  }
+}

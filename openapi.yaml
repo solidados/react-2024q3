@@ -1,0 +1,75 @@
+openapi: 3.0.0
+info:
+  title: OMDB API
+  description: API for searching movies through the OMDB API.
+  version: 1.0.0
+servers:
+  - url: https://www.omdbapi.com/
+    description: Main server for accessing OMDB API
+paths:
+  /:
+    get:
+      summary: Search for movies
+      description: Search for movies based on the provided query.
+      parameters:
+        - name: s
+          in: query
+          description: The search query for movies
+          required: true
+          schema:
+            type: string
+        - name: apikey
+          in: query
+          description: API key for OMDB API
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of movies matching the search query
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Search:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Movie'
+                  totalResults:
+                    type: string
+                  Response:
+                    type: string
+                    example: "True"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    Movie:
+      type: object
+      properties:
+        Title:
+          type: string
+          example: "Inception"
+        Year:
+          type: string
+          example: "2010"
+        imdbID:
+          type: string
+          example: "tt1375666"
+        Type:
+          type: string
+          example: "movie"
+        Poster:
+          type: string
+          example: "https://example.com/poster.jpg"
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Request failed. No data found"
