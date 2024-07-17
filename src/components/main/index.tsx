@@ -70,10 +70,9 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
     });
   }, [search, location.search, initialPage]);
 
-  const handleCardClick = (imdbID: string): void => {
-    navigate(`details/${imdbID}`);
-    // navigate(`/?search=${search}&page=${page}&details=${imdbID}`);
-  };
+  // const handleCardClick = (imdbID: string): void => {
+  //   navigate(`details/${imdbID}`);
+  // };
 
   const handleCloseDetails = (): void => {
     navigate(`/?s=${search}&page=${page}`);
