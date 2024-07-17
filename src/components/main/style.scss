@@ -57,5 +57,8 @@
     width: 100%;
     column-gap: 10px;
     row-gap: 20px;
+    & a {
+      color: inherit;
+    }
   }
 }
