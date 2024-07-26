@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Movie } from '../../../services/types/api.interface';
-
-import './style.scss';
 import { Link } from 'react-router-dom';
+
+import './movieCard.scss';
 
 interface MovieCardProps {
   movie: Movie;
