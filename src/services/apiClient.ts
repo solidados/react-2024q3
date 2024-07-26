@@ -5,7 +5,7 @@ import { CustomError, errorHandler } from './errorHandler';
 const createApiClient = (apikey: string, baseUrl: string) => {
   const getMovies = async (
     search: string,
-    page: number = 1
+    page: number
   ): Promise<ApiResponse | undefined> => {
     const url: string = `${baseUrl}?s=${search}&apikey=${apikey}&page=${page}`;
 

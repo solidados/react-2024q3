@@ -1,10 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { ApiResponse, Movie } from '../../services/types/api.interface';
-import { api } from '../../services/apiClient';
-import { CustomError } from '../../services/errorHandler';
-import MovieCard from './ui/MovieCard';
-import Loader from './ui/Loader';
+import MovieList from './ui/MovieList';
 
 import './style.scss';
 
@@ -13,100 +9,30 @@ interface MainProps {
   page: number;
 }
 
-const Main: FC<MainProps> = ({ search, page: initialPage }) => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [totalPages, setTotalPages] = useState<number>(1);
-  const [page, setPage] = useState<number>(initialPage);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<CustomError | null>(null);
+const Main: FC<MainProps> = ({ search, page }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const fetchMovies = async (search: string, page: number): Promise<void> => {
-    setIsLoading(true);
-    try {
-      const data: ApiResponse | undefined = await api.getMovies(search, page);
-
-      if (data && data.Search) {
-        setMovies(data.Search);
-        const totalResults = parseInt(data.totalResults, 10);
-        setTotalPages(Math.ceil(totalResults / 10));
-        setError(null);
-      } else {
-        setMovies([]);
-        setError(null);
-      }
-    } catch (error: unknown) {
-      setError(new CustomError((error as Error).message, 404));
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleNextPage = (): void => {
-    if (page < totalPages) {
-      const nextPage: number = page + 1;
-      setPage(nextPage);
-      navigate(`/?s=${search}&page=${nextPage}`);
-    }
-  };
-
-  const handlePreviousPage = (): void => {
-    if (page > 1) {
-      const previousPage: number = page - 1;
-      setPage(previousPage);
-      navigate(`/?s=${search}&page=${previousPage}`);
-    }
+  const handleCloseDetails = (): void => {
+    navigate(-1);
+    // navigate(`/?s=${search}&page=${page}`);
   };
 
   useEffect((): void => {
-    const query = new URLSearchParams(location.search).get('s') || search;
-    const pageParam = new URLSearchParams(location.search).get('page');
-    const pageNumber = pageParam ? parseInt(pageParam, 10) : initialPage;
-    setPage(pageNumber);
-
-    fetchMovies(query, pageNumber).catch((error): void => {
-      setError(new CustomError(error.message, 500));
-    });
-  }, [search, location.search, initialPage]);
-
-  const handleCloseDetails = (): void => {
-    navigate(`/?s=${search}&page=${page}`);
-  };
+    if (!location.pathname.includes('details')) {
+      const query = new URLSearchParams(location.search).get('s') || search;
+      const pageParam = new URLSearchParams(location.search).get('page');
+      const pageNumber = pageParam ? parseInt(pageParam, 10) : page;
+      navigate(`/?s=${query}&page=${pageNumber}`);
+    }
+  }, [search, page, location.pathname, navigate, location.search]);
 
   return (
     <main className="main">
       <div className="main-container">
-        <div className="main-content">
-          {error && <p>{error.message}</p>}
-          {isLoading && <Loader />}
-          {movies && movies.length > 0 ? (
-            <>
-              <div className="main-pagination">
-                <button onClick={handlePreviousPage} disabled={page === 1}>
-                  &#8701;
-                </button>
-                <span>
-                  Page {page} of {totalPages}
-                </span>
-                <button onClick={handleNextPage} disabled={page === totalPages}>
-                  &#8702;
-                </button>
-              </div>
-              <div className="main-wrapper">
-                <div className="main-result">
-                  {movies.map((movie: Movie) => (
-                    <MovieCard key={movie.imdbID} movie={movie} />
-                  ))}
-                </div>
-              </div>
-            </>
-          ) : (
-            <p>No movies found</p>
-          )}
-        </div>
+        <MovieList search={search} page={page} />
         {location.pathname.includes('details') && (
-          <div className="details-section">
+          <div className="details-section" onClick={handleCloseDetails}>
             <button className="details-close" onClick={handleCloseDetails}>
               &times;
             </button>

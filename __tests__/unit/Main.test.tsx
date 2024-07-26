@@ -5,7 +5,7 @@ import { mockMovies } from './mocks/mockObjects';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Main from '../../src/components/main';
 
-describe('Main Component', (): void => {
+describe('main Component', (): void => {
   beforeEach((): void => {
     vi.spyOn(apiClient.api, 'getMovies').mockResolvedValue({
       Search: mockMovies,
