@@ -1,23 +1,64 @@
+@import "../../styles/mixins.scss";
+
 .main {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   flex: 1 1 auto;
   width: 100%;
   padding: 20px 0;
   color: #2e2e2e;
+  overflow: hidden;
 
   &-container {
+    @include flexParams($justify-content: flex-start);
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &-content {
+    position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    //height: calc(100vh - 160px);
-    //overflow: scroll;
+    width: 100%;
+    overflow: auto;
+  }
+
+  &-wrapper {
+    @include flexParams($justify-content: flex-start);
+    flex-direction: column;
+    width: 100%;
+
+    & span {
+      display: inline-block;
+    }
+  }
+
+  &-pagination {
+    @include flexParams($justify-content: space-around);
+    width: 40%;
+    padding: 0 0 20px;
+
+    & button {
+      @include buttonActive(
+        $border-radius: 50%,
+        $align-items: stretch,
+        $padding: 5px 12px
+      );
+
+      &[disabled] {
+        @include buttonInactive($border-radius: 50%, $padding: 5px 12px);
+      }
+    }
   }
 
   &-result {
-    display: flex;
+    @include flexParams();
     flex-wrap: wrap;
+    width: 100%;
     column-gap: 10px;
     row-gap: 20px;
+    & a {
+      color: inherit;
+    }
   }
 }

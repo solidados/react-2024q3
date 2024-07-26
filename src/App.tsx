@@ -1,29 +1,42 @@
-import { Component, createRef, RefObject } from 'react';
-import { Header, Main, Footer } from './components';
+import { FC, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { DetailedMovie, Footer, Header, Main } from './components';
+import ErrorComponent from './components/errorComponent';
+import { CustomError } from './services/errorHandler';
 
-class App extends Component {
-  mainRef: RefObject<Main>;
+const App: FC = () => {
+  const [search, setSearch] = useState<string>('Star Trek');
+  const [error, setError] = useState<CustomError | null>(null);
 
-  constructor(props: NonNullable<unknown>) {
-    super(props);
-    this.mainRef = createRef();
-  }
-
-  handleSearch = (search: string): void => {
-    if (this.mainRef.current) {
-      this.mainRef.current.fetchMovies(search);
-    }
+  const handleSearch = (search: string): void => {
+    setSearch(search);
   };
 
-  render() {
-    return (
-      <div className="wrapper">
-        <Header onSearch={this.handleSearch} />
-        <Main ref={this.mainRef} />
-        <Footer />
-      </div>
-    );
-  }
-}
+  const handleReload = (): void => {
+    setError(null);
+  };
+
+  return (
+    <div className="wrapper">
+      <Header onSearch={handleSearch} />
+      <Routes>
+        <Route path="/" element={<Main search={search} page={1} />}>
+          <Route path="/details/:imdbID" element={<DetailedMovie />} />
+        </Route>
+        <Route
+          path="*"
+          element={
+            <ErrorComponent
+              error={new CustomError('Page not found', 404)}
+              onReload={handleReload}
+            />
+          }
+        />
+      </Routes>
+      {error && <ErrorComponent error={error} onReload={handleReload} />}
+      <Footer />
+    </div>
+  );
+};
 
 export default App;

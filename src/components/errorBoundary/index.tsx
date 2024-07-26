@@ -1,5 +1,6 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
-import './style.scss';
+import ErrorComponent from '../errorComponent';
+import { CustomError } from '../../services/errorHandler';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -7,7 +8,7 @@ interface ErrorBoundaryProps {
 
 interface ErrorBoundaryState {
   hasError: boolean;
-  error: Error | null;
+  error: CustomError | null;
   errorInfo: ErrorInfo | null;
 }
 
@@ -22,13 +23,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   static getDerivedStateFromError(error: Error) {
-    return { hasError: true, error };
+    return { hasError: true, error: new CustomError(error.message, 500) };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    // TODO: remove temp console for Error test only
-    console.error('ErrorBoundary caught an error', error, errorInfo);
-    this.setState({ error, errorInfo });
+    this.setState({ error: new CustomError(error.message, 500), errorInfo });
   }
 
   handleReload = (): void => {
@@ -39,11 +38,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="error-page">
-          <h1>Something went wrong.</h1>
-          {this.state.error && <p>{this.state.error.message}</p>}
-          <button onClick={this.handleReload}>Reload</button>
-        </div>
+        <ErrorComponent error={this.state.error} onReload={this.handleReload} />
       );
     }
 
