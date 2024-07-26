@@ -1,24 +1,23 @@
 @import "../../../styles/mixins";
 
 .movie-card {
-  width: 13.75rem;
+  max-width: 13.75rem;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
   text-align: center;
-  overflow: hidden;
 
   &-descr {
     @include flexParams($justify-content: space-between);
     flex-direction: column;
-    height: 60px;
+    gap: 5px;
     padding: 8px 0;
     line-height: 1.2;
     overflow: hidden;
 
     & h3 {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
     }
 

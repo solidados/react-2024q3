@@ -11,6 +11,12 @@ interface MovieCardProps {
 const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   const defaultPoster = '/logo-no-image.png';
 
+  const truncateTitle = (title: string, maxLength: number): string => {
+    return title.length > maxLength
+      ? title.substring(0, maxLength) + '...'
+      : title;
+  };
+
   return (
     <Link to={`/details/${movie.imdbID}`} className="movie-card">
       <img
@@ -20,7 +26,7 @@ const MovieCard: FC<MovieCardProps> = ({ movie }) => {
         alt={movie.Title}
       />
       <div className="movie-card-descr">
-        <h3>{movie.Title}</h3>
+        <h3>{truncateTitle(movie.Title, 25)}</h3>
         <p>{movie.Year}</p>
       </div>
     </Link>
