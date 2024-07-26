@@ -59,6 +59,11 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
     }
   };
 
+  const handleCloseDetails = (): void => {
+    navigate(-1);
+    // navigate(`/?s=${search}&page=${page}`);
+  };
+
   useEffect((): void => {
     const query = new URLSearchParams(location.search).get('s') || search;
     const pageParam = new URLSearchParams(location.search).get('page');
@@ -69,10 +74,6 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
       setError(new CustomError(error.message, 500));
     });
   }, [search, location.search, initialPage]);
-
-  const handleCloseDetails = (): void => {
-    navigate(`/?s=${search}&page=${page}`);
-  };
 
   return (
     <main className="main">
@@ -106,7 +107,7 @@ const Main: FC<MainProps> = ({ search, page: initialPage }) => {
           )}
         </div>
         {location.pathname.includes('details') && (
-          <div className="details-section">
+          <div className="details-section" onClick={handleCloseDetails}>
             <button className="details-close" onClick={handleCloseDetails}>
               &times;
             </button>
