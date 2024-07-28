@@ -1,0 +1,51 @@
+@import "../../../styles/mixins.scss";
+
+.main{
+  &-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow: auto;
+  }
+
+  &-wrapper {
+    @include flexParams($justify-content: flex-start);
+    flex-direction: column;
+    width: 100%;
+
+    & span {
+      display: inline-block;
+    }
+  }
+
+  &-pagination {
+    @include flexParams($justify-content: space-around);
+    width: 40%;
+    padding: 0 0 20px;
+
+    & button {
+      @include buttonActive(
+              $border-radius: 50%,
+              $align-items: stretch,
+              $padding: 5px 12px
+      );
+
+      &[disabled] {
+        @include buttonInactive($border-radius: 50%, $padding: 5px 12px);
+      }
+    }
+  }
+
+  &-result {
+    @include flexParams();
+    flex-wrap: wrap;
+    width: 100%;
+    column-gap: 10px;
+    row-gap: 20px;
+    & a {
+      color: inherit;
+    }
+  }
+}

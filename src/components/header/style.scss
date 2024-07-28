@@ -1,0 +1,50 @@
+@import "../../styles/mixins";
+
+.header {
+  width: 100%;
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &-container {
+    @include flexParams($justify-content: flex-start);
+    gap: 5em;
+  }
+
+  &-logo {
+    width: 50px;
+    padding: 2px;
+    border: 1px solid rgb(138, 138, 138);
+    border-radius: 50%;
+  }
+
+  // TODO: remove this button after cross-check
+  .error-button {
+    @include buttonActive();
+  }
+
+  // --- eol ---
+  &-search {
+    &-bar {
+      display: flex;
+    }
+
+    &-input {
+      width: 300px;
+      height: 35px;
+      padding: 5px 10px;
+      border: 1px solid #ced4da;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.65);
+      font-size: 1em;
+
+      &:focus {
+        border-color: #007bff;
+      }
+    }
+
+    &-button {
+      @include buttonActive($border-radius: 0 5px 5px 0);
+    }
+  }
+}
